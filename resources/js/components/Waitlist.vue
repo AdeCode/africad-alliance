@@ -174,8 +174,8 @@ button:hover {
   }
   input:focus {
     outline: none;
-    background-color: inherit !important;
-    border-radius: 20px;
+    background-color: rgba(236, 236, 235, 0.77) !important;
+    border: 1px solid #10316b;
   }
   input::placeholder {
     text-align: center;
@@ -190,7 +190,7 @@ button:hover {
     font-size: 15px;
     color: rgba(236, 236, 235, 0.77);
     cursor: pointer;
-    padding: 18px;
+    padding: 17px;
   }
   .top p {
     line-height: 20px;
