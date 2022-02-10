@@ -108,9 +108,7 @@ body {
   top: 0;
   left: 0;
 }
-.input-mail:focus{
-    background: yellow;
-}
+
 .content svg {
   height: 50%;
 }
@@ -190,7 +188,7 @@ button:hover {
     font-size: 15px;
     color: rgba(236, 236, 235, 0.77);
     cursor: pointer;
-    padding: 17px;
+    padding: 18px;
   }
   .top p {
     line-height: 20px;
@@ -272,14 +270,9 @@ button:hover {
 
   input:focus {
     outline: none;
-    background: yellow;
-    color: red;
+    background: rgba(236, 236, 235, 0.77);
   }
 
-.input-mail:focus{
-    background: yellow;
-    color: red;
-}
   button {
     border: none;
     border-radius: 20px;
