@@ -110,7 +110,6 @@ body {
 }
 .input-mail:focus{
     background: yellow;
-    color: red;
 }
 .content svg {
   height: 50%;
@@ -162,10 +161,10 @@ button:hover {
   form {
     display: flex;
     flex-direction: column;
-    margin: 25px 0;
+    margin: 35px 0;
   }
   input {
-    height: inherit;
+    height: 5vh;
     border: none;
     font-size: small;
     background-color: rgba(236, 236, 235, 0.77);
@@ -188,14 +187,15 @@ button:hover {
     background-color: #10316b;
     height: inherit;
     font-weight: 600;
+    font-size: 15px;
     color: rgba(236, 236, 235, 0.77);
     cursor: pointer;
-    padding: 10px;
+    padding: 18px;
   }
   .top p {
     line-height: 20px;
     margin-bottom: 5px;
-    font-size: 12px;
+    font-size: 15px;
     font-weight: 300;
   }
 }
