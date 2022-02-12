@@ -25,7 +25,8 @@ class WaitlistController extends Controller
                 'fromEmail' => $waitlist['email'],
                 'fromName' => 'Africad Alliance',
                 'subject' => 'Africad Alliance',
-                'body' => 'Thank you for signing up to our waiting list, we will get back to you soon.'
+                'body' => 'Thanks for signing up to be a part of our community. Kindly click the link below to confirm your 
+                subscription and you\'ll be on your way'
             ];
             \Mail::send('mails.waitlist', $email_data, function($message) use ($email_data){
                 $message->to($email_data['recipient'])

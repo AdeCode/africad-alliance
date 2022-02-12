@@ -18,5 +18,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/mail', function () {
+    return view('mails.waitlist');
+});
+
+
+
 Route::get('/waitlist', [WaitlistController::class,'showWaitlist']);
 Route::post('/saveWaitlist', [WaitlistController::class,'saveWaitlist'])->name('saveWaitlist');

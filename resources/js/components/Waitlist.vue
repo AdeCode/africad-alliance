@@ -10,7 +10,9 @@
         class="transition duration-300 ease-in-out delay-150"
       >
         <path
-          d="M 0,400 C 0,400 0,200 0,200 C 167.59999999999997,242.26666666666668 335.19999999999993,284.53333333333336 514,272 C 692.8000000000001,259.46666666666664 882.8,192.13333333333333 1039,171 C 1195.2,149.86666666666667 1317.6,174.93333333333334 1440,200 C 1440,200 1440,400 1440,400 Z"
+          d="M 0,400 C 0,400 0,200 0,200 C 167.59999999999997,242.26666666666668 335.19999999999993,284.53333333333336 514,272 C 692.8000000000001,259.46666666666664 
+          882.8,192.13333333333333 1039,171 C 1195.2,149.86666666666667 1317.6,174.93333333333334 1440,200 C 1440,200 1440,
+          400 1440,400 Z"
           stroke="none"
           stroke-width="0"
           fill="#ffffffff"
@@ -142,7 +144,7 @@ button:hover {
         } */
 @media screen and (min-width: 1024px) {
   .content img {
-    left: 100px;
+    left: 80px;
   }
  
 }
@@ -196,6 +198,16 @@ button:hover {
     font-size: 15px;
     font-weight: 300;
   }
+  .content svg{
+    height: 50% !important;
+  }
+  svg path{
+    height: 200px;
+  }
+  .content img{
+    width: 50%;
+    height: 13%;
+  }
 }
 @media screen and (min-width: 768px) {
   .content {
@@ -208,7 +220,7 @@ button:hover {
   .content img {
     position: absolute;
     top: 0;
-    left: 10%;
+    left: 5%;
     width: 50%;
     height: 50%;
   }
@@ -223,7 +235,7 @@ button:hover {
   .bottom {
     position: absolute;
     top: 60%;
-    left: 150px;
+    left: 10%;
   }
   .top {
     width: 60%;
