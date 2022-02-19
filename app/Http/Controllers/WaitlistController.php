@@ -33,7 +33,7 @@ class WaitlistController extends Controller
                         ->from($email_data['fromEmail'], $email_data['fromName'])
                         ->subject($email_data['subject']);
             });
-            return redirect()->back()->with('success', 'Email Sent!');          
+            //return redirect()->back()->with('success', 'Email Sent!');          
         }else{
             return ('error encountered');
         }

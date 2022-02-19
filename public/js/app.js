@@ -5458,14 +5458,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Waitlist",
   data: function data() {
     return {
       form: {
-        email: ''
-      }
+        email: ""
+      },
+      error: "",
+      message: ""
     };
   },
   methods: {
@@ -5478,13 +5492,32 @@ __webpack_require__.r(__webpack_exports__);
     onSubmit: function onSubmit() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post("/saveWaitlist", this.form).then(function (response) {
-        var result = response.data;
-        console.log(result);
-        _this.form.email = "";
-      })["catch"](function (error) {
-        console.error(error);
-      });
+      var inp = document.getElementById('email');
+      var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+      if (this.form.email == "") {
+        inp.setAttribute('class', 'danger-border');
+        this.error = "The email field is required";
+      } else {
+        if (!this.form.email.match(validRegex)) {
+          this.error = "Please enter a valid email";
+        } else {
+          axios__WEBPACK_IMPORTED_MODULE_0___default().post("/saveWaitlist", this.form).then(function (response) {
+            var result = response.data;
+            _this.message = "A mail has been sent to ".concat(_this.form.email);
+            _this.form.email = "";
+          })["catch"](function (error) {
+            if (error.response) {
+              _this.error = error.response.data.message;
+              console.log(_this.error);
+            } else if (error.request) {
+              console.log(error.request);
+            } else {
+              console.log("Error", error.message);
+            }
+          });
+        }
+      }
     }
   }
 });
@@ -10593,7 +10626,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nbody {\r\n  background: rgba(94, 120, 165, 0.72);\r\n  padding: 0;\r\n  margin: 0;\r\n  color: #ececeb;\r\n  font-family: \"Montserrat\", sans-serif;\r\n  box-sizing: border-box;\n}\n.content {\r\n  width: 100%;\r\n  height: 100%;\r\n  position: relative;\n}\n.content img {\r\n  width: 100%;\r\n  height: 20%;\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\n}\n.content svg {\r\n  height: 50%;\n}\n.bottom {\r\n  padding: 0 20px;\r\n  position: relative;\r\n  top: 0;\n}\nbutton:hover {\r\n  background-color: rgba(94, 120, 165, 0.72);\n}\n.foot {\r\n  display: flex;\r\n  justify-content: flex-end;\r\n  margin: 20px;\n}\n.contact {\r\n  background-color: rgba(236, 236, 235, 0.77);\r\n  border-radius: 10px;\r\n  color: #10316b;\r\n  cursor: pointer;\r\n  display: flex;\r\n  align-items: center;\r\n  padding: 2px 4px;\r\n  font-size: 12px;\r\n  font-weight: 500;\n}\r\n/* @media screen and (max-width: 768px) {\r\n\r\n        } */\n@media screen and (min-width: 1024px) {\n.content img {\r\n    left: 80px;\n}\n}\n@media screen and (min-width: 1220px) {\n.bottom {\r\n    position: absolute;\r\n    top: 250px;\r\n    left: 150px;\n}\n}\n@media screen and (max-width: 767px) {\nform {\r\n    display: flex;\r\n    flex-direction: column;\r\n    margin: 35px 0;\n}\ninput {\r\n    height: 5vh;\r\n    border: none;\r\n    font-size: small;\r\n    background-color: rgba(236, 236, 235, 0.77);\r\n    padding: 10px;\r\n    margin-bottom: 15px;\r\n    border-radius: 10px;\n}\ninput:focus {\r\n    outline: none;\r\n    background-color: rgba(236, 236, 235, 0.77) !important;\r\n    border: 1px solid #10316b;\n}\ninput::-moz-placeholder {\r\n    text-align: center;\r\n    font-weight: 500;\n}\ninput:-ms-input-placeholder {\r\n    text-align: center;\r\n    font-weight: 500;\n}\ninput::placeholder {\r\n    text-align: center;\r\n    font-weight: 500;\n}\nbutton {\r\n    border: none;\r\n    border-radius: 10px;\r\n    background-color: #10316b;\r\n    height: inherit;\r\n    font-weight: 600;\r\n    font-size: 15px;\r\n    color: rgba(236, 236, 235, 0.77);\r\n    cursor: pointer;\r\n    padding: 18px;\n}\n.top p {\r\n    line-height: 20px;\r\n    margin-bottom: 5px;\r\n    font-size: 15px;\r\n    font-weight: 300;\n}\n.content svg{\r\n    height: 50% !important;\n}\nsvg path{\r\n    height: 200px;\n}\n.content img{\r\n    width: 50%;\r\n    height: 13%;\n}\n}\n@media screen and (min-width: 768px) {\n.content {\r\n    position: relative;\r\n    width: 100%;\r\n    height: 100%;\r\n    color: #fff;\n}\n.content img {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 5%;\r\n    width: 50%;\r\n    height: 50%;\n}\n.low {\r\n    position: fixed;\r\n    background: darkmagenta;\r\n    height: 50px;\r\n    width: 100%;\r\n    bottom: 0;\n}\n.bottom {\r\n    position: absolute;\r\n    top: 60%;\r\n    left: 10%;\n}\n.top {\r\n    width: 60%;\n}\n.top h2 {\r\n    font-weight: 600;\r\n    font-size: 50px;\r\n    margin: 0;\r\n    padding: 0;\n}\n.top p {\r\n    line-height: 24px;\r\n    margin-bottom: 5px;\r\n    max-width: 80%;\n}\n.form {\r\n    width: 80%;\r\n    /* padding: 2px 5px;\r\n    background: rgba(236, 236, 235, 0.77);\r\n    border-radius: 20px;\r\n    height: 7vh;\r\n    display: flex;\r\n    align-items: center; */\n}\nform {\r\n    width: 100%;\r\n    height: 6vh;\r\n    padding: 10px 5px;\r\n    border-radius: 20px;\r\n    display: flex;\r\n    justify-content: space-between;\r\n    background: rgba(236, 236, 235, 0.77);\r\n    margin-top: 10px;\n}\ninput {\r\n    height: inherit;\r\n    border: none;\r\n    font-size: large;\r\n    background: inherit !important;\r\n    border-radius: 10px;\r\n    width: 75%;\n}\ninput:focus {\r\n    outline: none;\r\n    background: rgba(236, 236, 235, 0.77);\n}\nbutton {\r\n    border: none;\r\n    border-radius: 20px;\r\n    border-top-right-radius: 30px;\r\n    border-bottom-right-radius: 30px;\r\n    background-color: #10316b;\r\n    height: inherit;\r\n    width: 25%;\r\n    color: rgba(236, 236, 235, 0.77);\r\n    cursor: pointer;\n}\n.foot {\r\n    display: flex;\r\n    justify-content: flex-end;\r\n    margin: 30px;\r\n    position: fixed;\r\n    bottom: 0;\r\n    right: 20px;\r\n    width: 100%;\n}\n.contact {\r\n    background-color: rgba(236, 236, 235, 0.77);\r\n    border-radius: 10px;\r\n    color: #10316b;\r\n    cursor: pointer;\r\n    display: flex;\r\n    align-items: center;\r\n    padding: 5px;\r\n    font-weight: 500;\n}\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nbody {\r\n  background: rgba(94, 120, 165, 0.72);\r\n  padding: 0;\r\n  margin: 0;\r\n  color: #ececeb;\r\n  font-family: \"Montserrat\", sans-serif;\r\n  box-sizing: border-box;\n}\n.content {\r\n  width: 100%;\r\n  height: 100%;\r\n  position: relative;\n}\n.invalid-feedback{\r\n  color: red;\r\n  font-size: 12px;\n}\n.danger-border{\r\n  border: 1px solid red;\n}\n.success-feedback{\r\n  color: rgb(2, 73, 2);\r\n  font-size: 12px;\n}\n.content img {\r\n  width: 100%;\r\n  height: 20%;\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\n}\n.content svg {\r\n  height: 50%;\n}\n.bottom {\r\n  padding: 0 20px;\r\n  position: relative;\r\n  top: 0;\n}\nbutton:hover {\r\n  background-color: rgba(94, 120, 165, 0.72);\n}\n.foot {\r\n  display: flex;\r\n  justify-content: flex-end;\r\n  margin: 20px;\n}\n.contact {\r\n  background-color: rgba(236, 236, 235, 0.77);\r\n  border-radius: 10px;\r\n  color: #10316b;\r\n  cursor: pointer;\r\n  display: flex;\r\n  align-items: center;\r\n  padding: 2px 4px;\r\n  font-size: 12px;\r\n  font-weight: 500;\n}\r\n/* @media screen and (max-width: 768px) {\r\n\r\n        } */\n@media screen and (min-width: 1024px) {\n.content img {\r\n    left: 80px;\n}\n}\n@media screen and (min-width: 1220px) {\n.bottom {\r\n    position: absolute;\r\n    top: 250px;\r\n    left: 150px;\n}\n}\n@media screen and (max-width: 767px) {\nform {\r\n    display: flex;\r\n    flex-direction: column;\r\n    margin: 35px 0;\n}\n.invalid-feedback-lg{\r\n    display: none;\n}\n.success-feedback-lg{\r\n    display: none;\n}\ninput {\r\n    height: 5vh;\r\n    border: none;\r\n    font-size: small;\r\n    background-color: rgba(236, 236, 235, 0.77);\r\n    padding: 10px;\r\n    margin-bottom: 15px;\r\n    border-radius: 10px;\n}\ninput:focus {\r\n    outline: none;\r\n    background-color: rgba(236, 236, 235, 0.77) !important;\r\n    border: 1px solid #10316b;\n}\ninput::-moz-placeholder {\r\n    text-align: center;\r\n    font-weight: 500;\n}\ninput:-ms-input-placeholder {\r\n    text-align: center;\r\n    font-weight: 500;\n}\ninput::placeholder {\r\n    text-align: center;\r\n    font-weight: 500;\n}\nbutton {\r\n    border: none;\r\n    border-radius: 10px;\r\n    background-color: #10316b;\r\n    height: inherit;\r\n    font-weight: 600;\r\n    font-size: 15px;\r\n    color: rgba(236, 236, 235, 0.77);\r\n    cursor: pointer;\r\n    padding: 18px;\n}\n.top p {\r\n    line-height: 20px;\r\n    margin-bottom: 5px;\r\n    font-size: 15px;\r\n    font-weight: 300;\n}\n.content svg {\r\n    height: 50% !important;\n}\nsvg path {\r\n    height: 200px;\n}\n.content img {\r\n    width: 50%;\r\n    height: 13%;\n}\n}\n@media screen and (min-width: 768px) {\n.content {\r\n    position: relative;\r\n    width: 100%;\r\n    height: 100%;\r\n    color: #fff;\n}\n.invalid-feedback{\r\n    display: none;\n}\n.invalid-feedback-lg{\r\n    color: red;\r\n    font-size: 14px;\n}\n.success-feedback{\r\n    display: none;\n}\n.success-feedback-lg{\r\n    color: green;\r\n    font-size: 14px;\r\n    padding: 5px 0px;\n}\n.content img {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 5%;\r\n    width: 50%;\r\n    height: 50%;\n}\n.low {\r\n    position: fixed;\r\n    background: darkmagenta;\r\n    height: 50px;\r\n    width: 100%;\r\n    bottom: 0;\n}\n.bottom {\r\n    position: absolute;\r\n    top: 60%;\r\n    left: 10%;\n}\n.top {\r\n    width: 60%;\n}\n.top h2 {\r\n    font-weight: 600;\r\n    font-size: 50px;\r\n    margin: 0;\r\n    padding: 0;\n}\n.top p {\r\n    line-height: 24px;\r\n    margin-bottom: 5px;\r\n    max-width: 80%;\n}\n.form {\r\n    width: 80%;\r\n    /* padding: 2px 5px;\r\n    background: rgba(236, 236, 235, 0.77);\r\n    border-radius: 20px;\r\n    height: 7vh;\r\n    display: flex;\r\n    align-items: center; */\n}\nform {\r\n    width: 100%;\r\n    height: 6vh;\r\n    padding: 10px 5px;\r\n    border-radius: 20px;\r\n    display: flex;\r\n    justify-content: space-between;\r\n    background: rgba(236, 236, 235, 0.77);\r\n    margin-top: 10px;\n}\ninput {\r\n    height: inherit;\r\n    border: none;\r\n    font-size: large;\r\n    background: inherit !important;\r\n    border-radius: 10px;\r\n    width: 75%;\n}\ninput:focus {\r\n    outline: none;\r\n    background: rgba(236, 236, 235, 0.77);\n}\nbutton {\r\n    border: none;\r\n    border-radius: 20px;\r\n    border-top-right-radius: 30px;\r\n    border-bottom-right-radius: 30px;\r\n    background-color: #10316b;\r\n    height: inherit;\r\n    width: 25%;\r\n    color: rgba(236, 236, 235, 0.77);\r\n    cursor: pointer;\n}\n.foot {\r\n    display: flex;\r\n    justify-content: flex-end;\r\n    margin: 30px;\r\n    position: fixed;\r\n    bottom: 0;\r\n    right: 20px;\r\n    width: 100%;\n}\n.contact {\r\n    background-color: rgba(236, 236, 235, 0.77);\r\n    border-radius: 10px;\r\n    color: #10316b;\r\n    cursor: pointer;\r\n    display: flex;\r\n    align-items: center;\r\n    padding: 5px;\r\n    font-weight: 500;\n}\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -28680,6 +28713,8 @@ var render = function () {
             _c(
               "form",
               {
+                staticClass: "needs-validation",
+                attrs: { novalidate: "" },
                 on: {
                   submit: function ($event) {
                     $event.preventDefault()
@@ -28703,6 +28738,7 @@ var render = function () {
                     name: "email",
                     placeholder: "Email Address",
                     required: "",
+                    id: "email",
                   },
                   domProps: { value: _vm.form.email },
                   on: {
@@ -28715,11 +28751,35 @@ var render = function () {
                   },
                 }),
                 _vm._v(" "),
+                _vm.error
+                  ? _c("div", { staticClass: "invalid-feedback" }, [
+                      _vm._v(_vm._s(_vm.error)),
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.message
+                  ? _c("div", { staticClass: "success-feedback" }, [
+                      _vm._v(_vm._s(_vm.message)),
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
                 _c("button", { attrs: { type: "submit" } }, [
                   _vm._v("Get Started"),
                 ]),
               ]
             ),
+            _vm._v(" "),
+            _vm.error
+              ? _c("div", { staticClass: "invalid-feedback-lg" }, [
+                  _vm._v(_vm._s(_vm.error)),
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.message
+              ? _c("div", { staticClass: "success-feedback-lg" }, [
+                  _vm._v(_vm._s(_vm.message)),
+                ])
+              : _vm._e(),
           ]),
         ]),
       ]),

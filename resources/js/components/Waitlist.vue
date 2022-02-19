@@ -31,17 +31,29 @@
           </p>
           <p>We would love you to join our community of professionals.</p>
           <div class="form">
-            <form @submit.prevent="onSubmit">
-              <input 
-                type="email" 
-                name="email" 
-                v-model="form.email" 
-                placeholder="Email Address" 
+            <!-- <div v-if="error" class="alert alert-danger" role="alert">
+              {{ error }}
+            </div> -->
+            <form
+              @submit.prevent="onSubmit"
+              class="needs-validation"
+              novalidate
+            >
+              <input
+                type="email"
+                name="email"
+                v-model="form.email"
+                placeholder="Email Address"
                 required
                 class="input-mail"
-               />
+                id="email"
+              />
+              <div v-if="error" class="invalid-feedback">{{ error }}</div>
+              <div v-if="message" class="success-feedback">{{message}}</div>
               <button type="submit">Get Started</button>
             </form>
+            <div v-if="error" class="invalid-feedback-lg">{{ error }}</div>
+            <div v-if="message" class="success-feedback-lg">{{message}}</div>
           </div>
         </div>
       </div>
@@ -56,35 +68,55 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
   name: "Waitlist",
-  data(){
-      return{
-          form:{
-              email: '',
-          }
-      }
+  data() {
+    return {
+      form: {
+        email: "",
+      },
+      error: "",
+      message:"",
+    };
   },
   methods: {
     getLogo() {
       return "images/logo.png";
     },
-    getContactLogo(){
-        return "images/online.png"
+    getContactLogo() {
+      return "images/online.png";
     },
-    onSubmit(){
-        axios
-        .post("/saveWaitlist", this.form)
-        .then((response) => {
-          const result = response.data;
-          console.log(result);
-          this.form.email = "";
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
+    onSubmit() {     
+      const inp = document.getElementById('email')
+      const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+      if (this.form.email == "") {
+        inp.setAttribute('class', 'danger-border')
+        this.error = "The email field is required";
+      } else {
+        if (!this.form.email.match(validRegex)) {
+          this.error = "Please enter a valid email";
+        } else {
+          axios
+            .post("/saveWaitlist", this.form)
+            .then((response) => {
+              const result = response.data;
+              this.message=`A mail has been sent to ${this.form.email}`
+              this.form.email = "";
+            })
+            .catch((error) => {
+              if (error.response) {
+                this.error = error.response.data.message;
+                console.log(this.error);
+              } else if (error.request) {
+                console.log(error.request);
+              } else {
+                console.log("Error", error.message);
+              }
+            });
+        }
+      }
+    },
   },
 };
 </script>
@@ -102,6 +134,17 @@ body {
   width: 100%;
   height: 100%;
   position: relative;
+}
+.invalid-feedback{
+  color: red;
+  font-size: 12px;
+}
+.danger-border{
+  border: 1px solid red;
+}
+.success-feedback{
+  color: rgb(2, 73, 2);
+  font-size: 12px;
 }
 .content img {
   width: 100%;
@@ -146,7 +189,6 @@ button:hover {
   .content img {
     left: 80px;
   }
- 
 }
 
 @media screen and (min-width: 1220px) {
@@ -162,6 +204,12 @@ button:hover {
     display: flex;
     flex-direction: column;
     margin: 35px 0;
+  }
+  .invalid-feedback-lg{
+    display: none;
+  }
+  .success-feedback-lg{
+    display: none;
   }
   input {
     height: 5vh;
@@ -198,13 +246,13 @@ button:hover {
     font-size: 15px;
     font-weight: 300;
   }
-  .content svg{
+  .content svg {
     height: 50% !important;
   }
-  svg path{
+  svg path {
     height: 200px;
   }
-  .content img{
+  .content img {
     width: 50%;
     height: 13%;
   }
@@ -217,6 +265,21 @@ button:hover {
     color: #fff;
   }
 
+  .invalid-feedback{
+    display: none;
+  }
+  .invalid-feedback-lg{
+    color: red;
+    font-size: 14px;
+  }
+  .success-feedback{
+    display: none;
+  }
+  .success-feedback-lg{
+    color: green;
+    font-size: 14px;
+    padding: 5px 0px;
+  }
   .content img {
     position: absolute;
     top: 0;
@@ -260,7 +323,7 @@ button:hover {
     display: flex;
     align-items: center; */
   }
-  
+
   form {
     width: 100%;
     height: 6vh;
