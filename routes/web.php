@@ -26,3 +26,4 @@ Route::get('/mail', function () {
 
 Route::get('/waitlist', [WaitlistController::class,'showWaitlist']);
 Route::post('/saveWaitlist', [WaitlistController::class,'saveWaitlist'])->name('saveWaitlist');
+Route::get('/viewWaitlist', [WaitlistController::class, 'viewRegisteredUsers']);

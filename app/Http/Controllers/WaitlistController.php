@@ -48,4 +48,10 @@ class WaitlistController extends Controller
             return false;
         }
     }
+
+    public function viewRegisteredUsers(){
+        $users = Wait::all();
+        //dd($users);
+        return view('showUsers', compact('users'));
+    }
 }
