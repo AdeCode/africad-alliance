@@ -20,7 +20,12 @@
                 <tr>
                     <td>{{  $user->email }}</td>
                     <td>
-                        <form id="delete-form-{{$user->id}}" action="{{route('deleteUser', $user->id)}}" style="display: none" method="POST">
+                        <form action="{{ route('deleteUser', $user->id)}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger" type="submit">Delete</button>
+                        </form>
+                        {{-- <form id="delete-form-{{$user->id}}" action="{{route('deleteUser', $user->id)}}" style="display: none" method="POST">
                           @csrf
                           {{method_field('DELETE')}}
                         </form>
@@ -33,7 +38,7 @@
                             else{
                               event.preventDefault();
                             }">Delete
-                        </a>
+                        </a> --}}
                     </td>  
                 </tr>          
                 @endforeach

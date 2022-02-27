@@ -58,7 +58,7 @@ class WaitlistController extends Controller
     public function deleteUser($id)
     {
         Wait::where('id', $id)->delete();
-        $users = Wait::all();
-        return view('showUsers', compact('users'));
+        return redirect('/viewWaitlist')->with('success', 'user successfully deleted');
+        
     }
 }
