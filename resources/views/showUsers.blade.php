@@ -8,18 +8,42 @@
 </head>
 <body>
     <div>
-        <ul>
             @if ($users)
-                @foreach ($users as $user)                    
-                    <li>
-                    {{  $user->email }}
-                    </li>
+            <table>
+                <tr>
+                    <th>email</th>
+                    <th>delete</th>
+                </tr>
+            
+            <tbody>
+                @foreach ($users as $user) 
+                <tr>
+                    <td>{{  $user->email }}</td>
+                    <td>
+                        <form id="delete-form-{{$user->id}}" action="{{route('deleteUser', $user->id)}}" style="display: none" method="POST">
+                          @csrf
+                          {{method_field('DELETE')}}
+                        </form>
+                        <a href="{{route('viewWaitlist')}}" onclick="
+                          if(confirm('Are you sure, you want to delete this?'))
+                            {
+                              event.preventDefault();
+                              document.getElementById('delete-form-{{$user->id}}').submit();
+                            }
+                            else{
+                              event.preventDefault();
+                            }">Delete
+                        </a>
+                    </td>  
+                </tr>          
                 @endforeach
+                
+            </tbody>
+        </table>
             @else
                 <h2>No registered user</h2>
             @endif
            
-        </ul>
     </div>
     
 </body>
