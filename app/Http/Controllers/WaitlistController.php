@@ -51,7 +51,6 @@ class WaitlistController extends Controller
 
     public function viewRegisteredUsers(){
         $users = Wait::all();
-        //dd($users);
         return view('showUsers', compact('users'));
     }
 
@@ -59,7 +58,6 @@ class WaitlistController extends Controller
     {
         Wait::where('id', $id)->delete();
         return redirect()->back();
-        //return redirect('/viewWaitlist')->with('success', 'user successfully deleted');
         
     }
 }
